@@ -1,0 +1,12 @@
+{
+  "name": "congestionamento-cerebral",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "build": "node tools/build-public.mjs",
+    "generate": "node tools/generate-levels.mjs",
+    "solve": "node tools/solve-levels.mjs",
+    "test": "node --test"
+  }
+}

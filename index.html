@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#eff2ec">
+  <meta name="description" content="Um jogo de lógica de tabuleiro. Deslize os veículos e leve o carrinho vermelho até a saída.">
+  <title>Congestionamento Cerebral</title>
+  <link rel="stylesheet" href="./src/styles.css">
+  <script type="module" src="./src/start.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>Congestionamento Cerebral</span></div>
+      <button class="settings-button" id="settings-open" type="button">Configurações</button>
+    </div>
+  </header>
+
+  <p class="catalog-message" id="catalog-error" role="alert" hidden></p>
+  <main class="shell">
+    <section class="game-card" aria-labelledby="phase-title">
+      <div class="game-header">
+        <div>
+          <p class="phase-label" id="phase-label"></p>
+          <h1 id="phase-title">Desafio 1</h1>
+        </div>
+        <div class="counter" aria-live="polite">
+          <span>Movimentos usados</span>
+          <strong id="move-count">0</strong>
+        </div>
+      </div>
+      <p class="catalog-message" id="catalog-notice" role="status" hidden>O catálogo mudou. Seu progresso foi reiniciado.</p>
+      <p class="instructions" id="instructions">Deslize os veículos e leve o carrinho vermelho até a saída.</p>
+
+      <div class="board-area">
+        <div class="board-stage">
+          <div class="board-frame">
+            <div class="board" id="board" role="group" aria-label="Tabuleiro de seis por seis" aria-describedby="instructions"></div>
+            <div class="exit-sign" aria-hidden="true"><span></span></div>
+          </div>
+          <span class="exit-label" aria-hidden="true">Saída</span>
+        </div>
+      </div>
+
+      <div class="game-footer">
+        <button class="control" id="undo" type="button">Desfazer</button>
+        <button class="control" id="restart" type="button">Reiniciar</button>
+        <button class="control" id="result" type="button" hidden>Ver resultado</button>
+      </div>
+      <p class="sr-only" id="announcement" role="status"></p>
+      <p class="save-warning" id="save-warning" hidden>O navegador não conseguiu salvar o progresso.</p>
+    </section>
+
+    <aside class="challenges" aria-labelledby="challenges-title">
+      <h2 id="challenges-title">Desafios</h2>
+      <p class="difficulty-label">Dificuldade</p>
+      <div class="tier-list" id="tier-list" role="group" aria-label="Dificuldade"></div>
+      <div class="mode-switch" role="group" aria-label="Tipo de desafio">
+        <button id="normal-tab" type="button" aria-pressed="true">Normais</button>
+        <button id="extra-tab" type="button" aria-pressed="false">Extras</button>
+      </div>
+      <div id="mode-panel"></div>
+    </aside>
+  </main>
+
+  <dialog class="dialog" id="settings" aria-labelledby="settings-title">
+    <form method="dialog">
+      <h2 id="settings-title">Configurações</h2>
+      <fieldset>
+        <legend>Progressão das fases normais</legend>
+        <label class="option">
+          <input type="radio" name="sequence" value="sequential">
+          <span><strong>Sequencial</strong><small>Cada vitória libera a fase seguinte.</small></span>
+        </label>
+        <label class="option">
+          <input type="radio" name="sequence" value="free">
+          <span><strong>Livre</strong><small>Escolha qualquer fase da dificuldade liberada.</small></span>
+        </label>
+      </fieldset>
+      <div class="dialog-buttons">
+        <button class="primary" value="close" autofocus>Concluir</button>
+        <button class="secondary reset-trigger" id="reset-open" type="button" aria-controls="reset-confirmation" aria-expanded="false">Apagar progresso</button>
+      </div>
+      <div class="reset-confirmation" id="reset-confirmation" role="group" aria-labelledby="reset-title" aria-describedby="reset-description" hidden>
+        <strong id="reset-title">Apagar todo o progresso?</strong>
+        <p id="reset-description">Suas vitórias, desbloqueios e partidas salvas serão apagados. Essa ação é permanente.</p>
+        <div class="dialog-buttons">
+          <button class="secondary" id="reset-cancel" type="button">Cancelar</button>
+          <button class="danger" id="reset-confirm" type="button">Apagar tudo</button>
+        </div>
+        <p class="reset-error" id="reset-error" role="alert" hidden>O navegador não permitiu apagar o progresso. Tente novamente.</p>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="dialog victory-dialog" id="victory" aria-labelledby="victory-title">
+    <div id="victory-content"></div>
+  </dialog>
+
+  <noscript><p class="no-script">Ative o JavaScript para jogar.</p></noscript>
+</body>
+</html>
